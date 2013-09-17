@@ -2,6 +2,7 @@ var dbm = require('./dbmanager')
   , server = require('restify').createServer();
 
 server.get('/doc', function(req, res){
+  console.log('Getting data...');
   dbm.getById('test', function(e,d) {
     if(e) console.log(e);
     res.end(JSON.stringify(d));
@@ -9,6 +10,7 @@ server.get('/doc', function(req, res){
 });
 
 server.post('/doc/:data', function(req, res){
+  console.log('Doing post data...');
   dbm.addData('test-' + new Date().getTime(), {data: req.params.data, date: new Date()}, function(e,d) {
     if(e) console.log(e);
     res.end(JSON.stringify(d));
